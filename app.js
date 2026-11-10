@@ -336,3 +336,23 @@ if (session) loadStore();
 render();
 if (session) sync();
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => { });
+
+// ---- 오프라인 지원: 상태 표시 + 발음 미리 받기 ----
+(function () {
+  const show = () => {
+    let el = document.getElementById('offline');
+    if (navigator.onLine) { el && el.remove(); return; }
+    if (!el) { el = document.createElement('div'); el.id = 'offline'; document.body.appendChild(el); }
+    el.textContent = '오프라인 · 복습 기록은 연결되면 자동으로 올라가요';
+  };
+  addEventListener('online', show); addEventListener('offline', show); show();
+  const warm = () => {
+    try {
+      if (!navigator.onLine || !navigator.serviceWorker || !navigator.serviceWorker.controller) return;
+      const urls = Object.values(store.words || {}).map(w => (w && w.data && w.data.audio) || (w && w.audio)).filter(Boolean);
+      if (urls.length) navigator.serviceWorker.controller.postMessage({ type: 'warmAudio', urls });
+    } catch (_) {}
+  };
+  setTimeout(warm, 4000); addEventListener('online', () => setTimeout(warm, 4000));
+  setInterval(warm, 10 * 60 * 1000);
+})();

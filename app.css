@@ -1,3 +1,5 @@
+@font-face{font-family:'Pretendard Variable';font-weight:45 920;font-display:swap;src:url('PretendardVariable.woff2') format('woff2')}
+#offline{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 8px);transform:translateX(-50%);z-index:50;background:#27272a;color:#fff;font-size:12.5px;padding:6px 12px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.3);white-space:nowrap}
 :root{--bg:#f5f5f7;--card:#fff;--fg:#111114;--mute:#6b6b76;--line:#e4e4ea;--red:#E50914;--lime:#CCFF00;--chip:#eeeef2;--ok:#1a9d4b}
 @media (prefers-color-scheme:dark){:root{--bg:#0e0e10;--card:#1a1a1e;--fg:#f2f2f5;--mute:#9a9aa6;--line:#2a2a30;--chip:#26262c;--ok:#4cd27d}}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
